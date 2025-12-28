@@ -3,7 +3,6 @@ build/
 bin/
 *.class
 *.log
-
 *.war
 *.ear
 *.zip
@@ -38,7 +37,6 @@ node_modules/
 .env.local
 *.log
 reports/
-jmeter-results/
 *.jtl
 *.csv
 
