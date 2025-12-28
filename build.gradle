@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.0.30'
+    id 'org.sonarqube' version '4.4.1.3373'
+}
+
+group = 'com.automation'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.serenity-bdd:serenity-core:4.0.30'
+    implementation 'net.serenity-bdd:serenity-junit:4.0.30'
+    implementation 'net.serenity-bdd:serenity-screenplay:4.0.30'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:4.0.30'
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:4.0.30'
+    implementation 'net.serenity-bdd:serenity-cucumber:4.0.30'
+    
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.assertj:assertj-core:3.24.2'
+    
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+    
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+    
+    implementation 'io.rest-assured:rest-assured:5.3.2'
+    implementation 'io.rest-assured:json-path:5.3.2'
+    implementation 'io.rest-assured:xml-path:5.3.2'
+    
+    testImplementation 'net.serenity-bdd:serenity-core:4.0.30'
+    testImplementation 'net.serenity-bdd:serenity-junit:4.0.30'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    systemProperty 'cucumber.filter.tags', System.getProperty('cucumber.filter.tags', '')
+}
+
+serenity {
+    testRoot = "com.automation"
+    requirementsBaseDir = "src/test/resources/features"
+    reports = ["json", "html"]
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
